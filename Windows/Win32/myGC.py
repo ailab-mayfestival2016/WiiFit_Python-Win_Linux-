@@ -125,7 +125,6 @@ class Controller:
 						self.client.sendData("px_ready",["Manager"],False)
 					elif event.key == K_q:
 						done=True
-						return
 				elif event.type == QUIT:
 					print "Quit"
 					done=True
