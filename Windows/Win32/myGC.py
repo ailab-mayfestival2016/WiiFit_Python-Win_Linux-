@@ -54,7 +54,7 @@ class Controller:
 	def connectServer(self):
 		self.client=SioClient()
 		#受信するイベント名一覧をリストとしてclientに渡す
-		eventList=["bar_width"];
+		eventList=["bar_width","bar_config"];
 		self.client.setEventList(eventList)
 		#自身を表す部屋名を設定する(Game Serverなら例えば"Game"と決める)
 		self.client.setMyRoom("Controller")
@@ -103,9 +103,11 @@ class Controller:
 			while(len(self.recvQueue)>0):
 				e=self.recvQueue[0]
 				del self.recvQueue[0]
-				if(e[0]=="bar_width"):
+				if(e[0]=="bar_config"):
 					self.barInit=True
-					self.bar.width=e[1]
+					self.bar.width=e[1]["width"]
+					self.bar.region=e[1]["region"][:]
+					self.bar.calib=e[1]["calib"][:]
 					print "bar width initialized"
 			for event in pygame.event.get():
 				if event.type == KEYDOWN:  # キーを押したとき
