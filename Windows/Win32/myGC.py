@@ -105,9 +105,9 @@ class Controller:
 				del self.recvQueue[0]
 				if(e[0]=="bar_config"):
 					self.barInit=True
-					self.bar.width=e[1]["width"]
-					self.bar.region=e[1]["region"][:]
-					self.bar.calib=e[1]["calib"][:]
+					self.bar.width=float(e[1]["width"])
+					self.bar.region=[float(e[1]["region"][0]),float(e[1]["region"][1])]
+					self.bar.calib=[float(e[1]["calib"][0]),float(e[1]["calib"][1])]
 					print "bar width initialized"
 			for event in pygame.event.get():
 				if event.type == KEYDOWN:  # キーを押したとき
